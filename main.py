@@ -286,7 +286,7 @@ class Roblox:
             })
             
             if response.status_code == 200:
-                return js["conversations"]
+                return response.json()["conversations"]
             else:
                 print("Roblox.CreateConversation | Rate limited. Retrying in 60s")
                 time.sleep(60)
