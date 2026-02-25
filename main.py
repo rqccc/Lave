@@ -305,8 +305,12 @@ class Roblox:
                 print(f"Roblox.SendMessage | Messaged {id}")
                 return
             else:
-                print("Roblox.SendMessage | Rate limited. Retrying in 60s")
-                time.sleep(60)
+                js = response.json()
+                if js.get("Error"):
+                    print(f"Roblox.SendMessage | User {id} in different age group")
+                else:
+                    print("Roblox.SendMessage | Rate limited. Retrying in 60s")
+                    time.sleep(60)
     
     def CreateGamepass(self, name, description, universe_id, image_path):
         image = binary(image_path)
@@ -364,7 +368,7 @@ def Menu():
 
 
 def Commands():
-    CommandList = ["Clear Badges", "Clear Friends", "Clear Following", "Private Games", "Get Free Items", "Mass DM", "Gamepass Spam"]
+    CommandList = ["Clear Badges", "Clear Friends", "Clear Following", "Private Games", "Get Free Items", "Mass DM"]
     print("".join(
         f"      {i}: {cmd}\n"
         for i, cmd in enumerate(CommandList, start=1)
@@ -456,6 +460,9 @@ while True:
         for Friend in Friends:
             Convo = HasConvo(Friend) or API.CreateConversation(Friend)[0]["id"]
             ConvoId = Convo["id"]
+            if not ConvoId:
+                continue
+            
             API.SendMessage(ConvoId, Message)
         
         print("Lave | Successfully mass dm'd!")
