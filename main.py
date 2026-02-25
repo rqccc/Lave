@@ -363,7 +363,7 @@ def Menu():
 
 
 def Commands():
-    CommandList = ["Clear Badges", "Clear Friends", "Clear Following", "Private Games", "Get Free Items", "Mass DM", "Gamepass Spam"]
+    CommandList = ["Clear Badges", "Clear Friends", "Clear Following", "Private Games", "Get Free Items", "Mass DM"]
     print("".join(
         f"      {i}: {cmd}\n"
         for i, cmd in enumerate(CommandList, start=1)
